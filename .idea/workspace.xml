@@ -42,7 +42,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.NaiveBaseAlgo">
     <configuration name="AdvanceNBA" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Machine" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -64,8 +64,30 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="NaiveBaseAlgo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Machine" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/assignmnet1" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/assignmnet1/NaiveBaseAlgo.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.NaiveBaseAlgo" />
         <item itemvalue="Python.AdvanceNBA" />
       </list>
     </recent_temporary>
@@ -102,7 +124,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587460550314</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="before remove split">
+      <created>1587492013521</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1587492013521</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -127,22 +156,22 @@
       <screen x="0" y="23" width="1280" height="709" />
     </state>
     <state x="149" y="39" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1280.709@0.23.1280.709" timestamp="1587453603249" />
-    <state width="1239" height="127" key="GridCell.Tab.0.bottom" timestamp="1587491835654">
+    <state width="1239" height="249" key="GridCell.Tab.0.bottom" timestamp="1587493147281">
       <screen x="0" y="23" width="1280" height="709" />
     </state>
-    <state width="1239" height="127" key="GridCell.Tab.0.bottom/0.23.1280.709@0.23.1280.709" timestamp="1587491835654" />
-    <state width="1239" height="127" key="GridCell.Tab.0.center" timestamp="1587491835653">
+    <state width="1239" height="249" key="GridCell.Tab.0.bottom/0.23.1280.709@0.23.1280.709" timestamp="1587493147281" />
+    <state width="1239" height="249" key="GridCell.Tab.0.center" timestamp="1587493147281">
       <screen x="0" y="23" width="1280" height="709" />
     </state>
-    <state width="1239" height="127" key="GridCell.Tab.0.center/0.23.1280.709@0.23.1280.709" timestamp="1587491835653" />
-    <state width="1239" height="127" key="GridCell.Tab.0.left" timestamp="1587491835653">
+    <state width="1239" height="249" key="GridCell.Tab.0.center/0.23.1280.709@0.23.1280.709" timestamp="1587493147281" />
+    <state width="1239" height="249" key="GridCell.Tab.0.left" timestamp="1587493147280">
       <screen x="0" y="23" width="1280" height="709" />
     </state>
-    <state width="1239" height="127" key="GridCell.Tab.0.left/0.23.1280.709@0.23.1280.709" timestamp="1587491835653" />
-    <state width="1239" height="127" key="GridCell.Tab.0.right" timestamp="1587491835654">
+    <state width="1239" height="249" key="GridCell.Tab.0.left/0.23.1280.709@0.23.1280.709" timestamp="1587493147280" />
+    <state width="1239" height="249" key="GridCell.Tab.0.right" timestamp="1587493147281">
       <screen x="0" y="23" width="1280" height="709" />
     </state>
-    <state width="1239" height="127" key="GridCell.Tab.0.right/0.23.1280.709@0.23.1280.709" timestamp="1587491835654" />
+    <state width="1239" height="249" key="GridCell.Tab.0.right/0.23.1280.709@0.23.1280.709" timestamp="1587493147281" />
     <state width="1239" height="228" key="GridCell.Tab.1.bottom" timestamp="1587490480832">
       <screen x="0" y="23" width="1280" height="709" />
     </state>
@@ -163,10 +192,10 @@
       <screen x="0" y="23" width="1280" height="709" />
     </state>
     <state x="122" y="23" width="982" height="709" key="SettingsEditor/0.23.1280.709@0.23.1280.709" timestamp="1587479275571" />
-    <state x="230" y="117" key="Vcs.Push.Dialog.v2" timestamp="1587460552501">
+    <state x="230" y="117" key="Vcs.Push.Dialog.v2" timestamp="1587492015373">
       <screen x="0" y="23" width="1280" height="709" />
     </state>
-    <state x="230" y="117" key="Vcs.Push.Dialog.v2/0.23.1280.709@0.23.1280.709" timestamp="1587460552501" />
+    <state x="230" y="117" key="Vcs.Push.Dialog.v2/0.23.1280.709@0.23.1280.709" timestamp="1587492015373" />
     <state x="417" y="298" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587453506864">
       <screen x="0" y="23" width="1280" height="709" />
     </state>

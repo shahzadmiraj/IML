@@ -151,6 +151,8 @@ def TrainingDatasetPercentage(Testing):
         Testing = Testing.append(a_series, ignore_index=True)
         print Testing
 
+        
+
 
 TrainingDatasetPercentage(Testing)
 
