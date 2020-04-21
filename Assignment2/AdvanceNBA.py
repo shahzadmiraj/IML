@@ -8,6 +8,27 @@ featureValueInputs=[]
 table=[]
 
 
+def stringIsnumber(string):
+    try:
+        val = int(string)
+        return True
+    except ValueError:
+        return False
+
+
+def CheckTwoStringNumber(stringlist):
+    if stringIsnumber(stringlist[0]) and stringIsnumber(stringlist[1]):
+        return True
+    else:
+        return False
+
+def splitFunction(string):
+    stringlist=string.split("-")
+    if len(stringlist)==2:
+        if CheckTwoStringNumber(stringlist):
+            return True
+    return False
+
 
 
 def inputUserNumber(x):
@@ -89,30 +110,47 @@ def findLikelihood(C,featureValueInputs,table):
 
 import numpy as np
 import  pandas as pd
-dataOrignal=pd.read_csv('../dataset/iris.csv',header=None)
+dataOrignal=pd.read_csv('../dataset/breast-cancer.csv',header=None)
 
 
-transpose=dataOrignal.T       #transpose
-headDataOrignal=dataOrignal.head()
-headTranspose=transpose.head()
-NoOfFeatures=headTranspose.shape[0]-1  #get no of feature from count rows
-IndexOfclass=NoOfFeatures # index of last row which is our class
-NamesOfClasses=headTranspose.loc[NoOfFeatures,].unique()
-NoOfClass=len(NamesOfClasses)
-NoOfSamples=headTranspose.shape[1]
+def TraverserTableForRanges(dataOrignal):
+    dataOrignal=dataOrignal.head()
+    for KeyRow, ValueColumns in dataOrignal.iteritems():
+        for keyColumn,EachColumValue in ValueColumns.iteritems():
+            if(dataOrignal.dtypes[keyColumn]=="object"):
+                if splitFunction(EachColumValue):
+                    NumberList=map(int, EachColumValue.split('-'))
+                    startNumber=NumberList[0]
+                    EndingNumber=NumberList[1]
+                    for number in range(startNumber,EndingNumber+1):
+                        CopyRow=dataOrignal.loc[KeyRow,]
+                        print CopyRow
 
 
-# for c in range(NoOfClass):
-#     list=np.where(headTranspose.loc[IndexOfclass,]==NamesOfClasses[c])[0]
-#     for v in list:
-#         headTranspose.loc[IndexOfclass,v]=c
+TraverserTableForRanges(dataOrignal)
 
-value=NamesOfClasses
+# transpose=dataOrignal.T       #transpose
+# headDataOrignal=dataOrignal.head()
+# headTranspose=transpose.head()
+#
+#
+#
+#
+#
+#
+# NoOfFeatures=headTranspose.shape[0]-1  #get no of feature from count rows
+# IndexOfclass=NoOfFeatures # index of last row which is our class
+# NamesOfClasses=headTranspose.loc[NoOfFeatures,].unique()
+# NoOfClass=len(NamesOfClasses)
+# NoOfSamples=headTranspose.shape[1]
+#
+#
+# value=NamesOfClasses
 # for f in range(NoOfFeatures):
 #     featureValueInputs.append(inputUserNumber(str(f+1)))
 
 
 
-featureValueInputs=[2.3, 2.3, 3.3, 23.0]
-table=np.array(headTranspose)
-NaiveBaseAlgo(featureValueInputs,table)
+# featureValueInputs=[2.3, 2.3, 3.3, 23.0]
+# table=np.array(headTranspose)
+# NaiveBaseAlgo(featureValueInputs,table)
