@@ -8,26 +8,6 @@ featureValueInputs=[]
 table=[]
 
 
-def stringIsnumber(string):
-    try:
-        val = int(string)
-        return True
-    except ValueError:
-        return False
-
-
-def CheckTwoStringNumber(stringlist):
-    if stringIsnumber(stringlist[0]) and stringIsnumber(stringlist[1]):
-        return True
-    else:
-        return False
-
-def splitFunction(string):
-    stringlist=string.split("-")
-    if len(stringlist)==2:
-        if CheckTwoStringNumber(stringlist):
-            return True
-    return False
 
 
 
@@ -43,29 +23,32 @@ def inputUserNumber(x):
 
 
 
-def Display(likelihoods):
+def Display(likelihoods,headTranspose,ClassName):
     likelihoodsCount=len(likelihoods)
-    ClassName=NamesOfClasses
     ProbilityOFClasses=[]
     SumOFLikeliHood=sum(likelihoods)
-    MaxClass=NamesOfClasses[0]
+    MaxClass=ClassName[0]
     MaxValue=0
     for l in range(likelihoodsCount):
         ProbilityOFClasses.append(likelihoods[l]/SumOFLikeliHood)
-        print ("Probility of class",ClassName[l],"=",ProbilityOFClasses[l],"with percentage is ",int(ProbilityOFClasses[l]*100))
+        #print ("Probility of class",ClassName[l],"=",ProbilityOFClasses[l],"with percentage is ",int(ProbilityOFClasses[l]*100))
         if(ProbilityOFClasses[l]>MaxValue):
             MaxValue=ProbilityOFClasses[l]
             MaxClass=ClassName[l]
 
-    print ("Maximum probiblity of class =",MaxClass,"with percentage is",int(MaxValue*100))
+    #print ("Maximum probiblity of class =",MaxClass,"with percentage is",int(MaxValue*100))
+    return MaxClass
 
 #NaiveBaseAlgo
-def NaiveBaseAlgo(featureValueInputs,table):
+def NaiveBaseAlgo(featureValueInputs,table,headTranspose):
     likelihoods=[]
 
+    NoOfFeatures = headTranspose.shape[0] - 1  # get no of feature from count rows
+    IndexOfclass = NoOfFeatures  # index of last row which is our class
+    NamesOfClasses = headTranspose.loc[NoOfFeatures,].unique()
     for c in NamesOfClasses:
         likelihoods.append(findLikelihood(c,featureValueInputs,table))
-    Display(likelihoods)
+    return Display(likelihoods,headTranspose,NamesOfClasses)
 
 def ProOfClass(C,table):
     count=0
@@ -110,47 +93,65 @@ def findLikelihood(C,featureValueInputs,table):
 
 import numpy as np
 import  pandas as pd
+import random
 dataOrignal=pd.read_csv('../dataset/breast-cancer.csv',header=None)
 
 
-def TraverserTableForRanges(dataOrignal):
-    dataOrignal=dataOrignal.head()
-    for KeyRow, ValueColumns in dataOrignal.iteritems():
-        for keyColumn,EachColumValue in ValueColumns.iteritems():
-            if(dataOrignal.dtypes[keyColumn]=="object"):
-                if splitFunction(EachColumValue):
-                    NumberList=map(int, EachColumValue.split('-'))
-                    startNumber=NumberList[0]
-                    EndingNumber=NumberList[1]
-                    for number in range(startNumber,EndingNumber+1):
-                        CopyRow=dataOrignal.loc[KeyRow,]
-                        print CopyRow
 
 
-TraverserTableForRanges(dataOrignal)
+transpose=dataOrignal     #transpose
+headDataOrignal=dataOrignal.head()
+headTranspose=transpose
 
-# transpose=dataOrignal.T       #transpose
-# headDataOrignal=dataOrignal.head()
-# headTranspose=transpose.head()
-#
-#
-#
-#
-#
-#
-# NoOfFeatures=headTranspose.shape[0]-1  #get no of feature from count rows
-# IndexOfclass=NoOfFeatures # index of last row which is our class
-# NamesOfClasses=headTranspose.loc[NoOfFeatures,].unique()
-# NoOfClass=len(NamesOfClasses)
-# NoOfSamples=headTranspose.shape[1]
-#
-#
+
+
+
+
+
+NoOfFeatures=headTranspose.shape[0]-1  #get no of feature from count rows
+IndexOfclass=NoOfFeatures # index of last row which is our class
+NamesOfClasses=headTranspose.loc[NoOfFeatures,].unique()
+NoOfClass=len(NamesOfClasses)
+NoOfSamples=headTranspose.shape[1]
+
+
+
+
+
 # value=NamesOfClasses
 # for f in range(NoOfFeatures):
 #     featureValueInputs.append(inputUserNumber(str(f+1)))
 
+training=headTranspose
+Testing=training
 
 
-# featureValueInputs=[2.3, 2.3, 3.3, 23.0]
-# table=np.array(headTranspose)
-# NaiveBaseAlgo(featureValueInputs,table)
+def GetFeatureValuesInputs(Testing,FeatureValuesInputs):
+    table = np.array(Testing)
+    totalColumn=len(table[0])
+    for featureValue in range(totalColumn-1):
+        FeatureValuesInputs.append(random.choice(table[:, featureValue]))
+
+def TrainingDatasetPercentage(Testing):
+    BestClass=Testing.loc[0,Testing.shape[1]-1]
+    countDeleteRows=Testing.shape[0]-int(Testing.shape[0]*90/100)
+    for i in range(countDeleteRows):
+        totalrows=Testing.shape[0]
+        row=int(random.random() * totalrows)
+        Testing = Testing.drop(row)
+        FeatureValuesInputs = []
+        GetFeatureValuesInputs(Testing,FeatureValuesInputs)
+        Testing=Testing.T
+        table=np.array(Testing)
+        BestClass=NaiveBaseAlgo(FeatureValuesInputs,table,Testing)
+        Testing = Testing.T
+        FeatureValuesInputs.append(BestClass)
+        print "input features and best class",FeatureValuesInputs
+        a_series = pd.Series(FeatureValuesInputs, index=Testing.columns)
+        Testing = Testing.append(a_series, ignore_index=True)
+        print Testing
+
+
+TrainingDatasetPercentage(Testing)
+
+
